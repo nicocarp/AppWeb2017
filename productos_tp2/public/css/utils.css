@@ -1,0 +1,90 @@
+img{
+	width: -moz-available;
+	/*background-image: url('{{URL('imagenes/carp/empty.png')}}')*/
+}
+.btn_comprar{
+	width: -moz-available;
+	}
+
+#precio_unitario{
+	    color:  red;    
+}
+.nombre_prod {   
+     
+     overflow:hidden;
+}
+body {
+    font-family: 'dinbold';    
+    padding: 10px 14px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.tarjeta_catalogo{color:black;}
+
+.check
+{
+    opacity:0.5;
+	color:#996;
+	border-color:red;
+	
+}
+
+.producto_precio{
+    font-size:20px;
+}
+
+.link_tarjeta{
+
+	color:black;
+}
+.link_tarjeta:hover{
+	color:red;
+}
+
+
+.label{
+    display: inline;
+    padding: .4em .6em .3em !important;
+    font-size: 70% !important;
+    font-weight: bold !important;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+}
+.table_factura{    
+    font-size: 12px !important;
+    font-weight: bold !important;        
+}
+th {
+    text-align: center;    
+}  
+
+
+.botones-1 {
+    border: 2px solid #171717 !important;
+    border-radius: 0px;
+    font-size: 15px;
+    display: inline-block;
+    line-height: 1.42857;
+    margin-bottom: 0;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+a:hover, a:focus {
+    color: red !important;
+}
+
+
+a:hover{ 
+    
+}
+.nombre-prod {   
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+}
