@@ -1,0 +1,146 @@
+.product-offprice-ribbon {
+    background-image: url(../imagenes/promocion.jpg);
+    width: 65px;
+    height: 64px;
+    position: absolute;
+    font-family: "oswald";
+    margin-right: 15px;
+    padding: 4px 7px;
+    color: #FFF;
+    text-align: center;
+    line-height: 1.5;
+    z-index:3;
+}
+
+#logo_river{
+    background-image: url(../imagenes/logo1.png);
+    width: 60px;
+    height: 60px;    
+    display:block;
+    padding-right:20px;
+}
+
+
+.combo-info {
+    background-image: url(../imagenes/combo_info.png);
+    width: 65px;
+    height: 64px;
+    position: absolute;
+    font-family: "dinbold";
+    margin-right: 15px;
+    padding: 4px 7px;
+    color: #FFF;
+    text-align: center;
+    line-height: 1.5;
+    z-index:3;
+}
+
+#alerta_combo {
+    position: absolute;
+    z-index: 1;
+     margin-right: 15px;
+    padding: 0px 0px;
+    color: #FFF;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.precio-viejo {
+    
+    font-family: "dinbold";
+    color:  #000;
+    text-decoration: line-through;
+    position: relative;
+}
+.numero_shopping_car {z-index:3; position:relative; left: -25px;}
+.btn_shopping_car {
+    bottom: 45px; right: 24px; top:45px;
+}
+.precio-promo {
+    font-family: "dinbold", sans-serif;
+    color:  red;    
+    position:relative;
+    padding-top: 10px;
+    padding-right: 5px;
+}
+
+.precio-sin-promo {
+    font-family: "dinbold", sans-serif;
+    color:  red;
+    position:relative;
+    padding-top: 10px;
+    padding-right: 5px;
+    z-index: 3;
+
+}
+.nombre-prod {   
+     float:left; margin:10px 0 0 0; word-wrap: break-word; width:100%;
+     overflow:hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+}
+
+.precio_unitario {
+    font-size: 100%;
+    color: #999;
+    font-style: italic;
+    line-height: normal;
+}
+#modal_info_producto {
+  
+}
+* {
+    box-sizing: border-box;
+}
+
+@media only screen and (max-width: 500px) {
+    body {
+        background-color: white;
+        #info_prod {
+
+
+        }
+    }
+}
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    [class*="col-"] {
+        width: 100%;
+    }
+}
+
+a:link {
+    color: black;
+}
+a:hover {
+    color: red;
+}
+
+body {
+    font-family: 'dinbold';    
+    padding: 10px 14px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.card-content{
+    background-color: white;
+}
+
+.header_titulo{
+    font-family: 'dinbold';    
+    padding: 10px 14px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+@media screen and (max-width: 600px) {
+    .m0{
+        display: block;
+    }
+    .s0{
+        display: none;
+    }
+}
+        
+    
