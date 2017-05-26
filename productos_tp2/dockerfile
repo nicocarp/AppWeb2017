@@ -1,0 +1,4 @@
+FROM tomsik68/xampp
+#RUN apt-get install php5.6-gd  
+#RUN apt-get install php5.6-intl
+#RUN  apt-get install php5.6-xsl

@@ -34,7 +34,7 @@ class StoreCategoria extends FormRequest
                 ];            
             case 'PUT':
                 return [
-                    'nombre' => 'required|unique:categorias,nombre,'.$this->id.'|max:20'                    
+                    'nombre' => 'required|unique:categorias,nombre,'.dd($this->segment(3));.'|max:20'                    
                 ];
             case 'DELETE':                
                 return [];

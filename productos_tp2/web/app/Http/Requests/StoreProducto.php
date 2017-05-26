@@ -34,9 +34,8 @@ class StoreProducto extends FormRequest
                     'categoria_id' => 'exists:categorias,id'
                 ];
             case 'PUT':
-                
                 return [
-                    'nombre' => 'required|unique:productos,nombre,'.$this->id.'|max:30',
+                    'nombre' => 'required|unique:productos,nombre,'.$this->segment(3).'|max:30',
                     'precio' => 'required|numeric|min:0',
                     'stock' => 'required|integer|min:0',
                     'descripcion' => 'required|max:100',                    

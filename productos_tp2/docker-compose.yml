@@ -1,0 +1,14 @@
+version: '2'
+services:
+
+  # The Application
+  app:
+    build:
+      context: ./
+      dockerfile: dockerfile
+    container_name: carro_laravel
+    working_dir: /www/carro
+    volumes:
+      - ./web/:/www/carro
+    ports :
+      - "8888:80"
