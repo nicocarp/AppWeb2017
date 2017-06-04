@@ -14,5 +14,9 @@ ejecutar en terminal docker exec -ti <nombre_contenedor> bash
 
 Con esto la base de datos carro_db debe quedar lista para usar. 
 
-
 http://0.0.0.0:8888/www/carro/public/	
+
+Reiniciar el servidor:
+
+docker exec carro_laravel  /opt/lampp/lampp restart
+
