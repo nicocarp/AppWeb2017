@@ -1,0 +1,22 @@
+<section>
+  <div class="page-header">
+    <h1>Tweets</h1>
+  </div>
+  <div class="list-group">
+    <a ng-repeat="tweet in vm.tweets"
+       ui-sref="tweets.view({ tweetId: tweet._id })"
+       class="list-group-item">
+      <small class="list-group-item-text">
+        Posted on
+        <span ng-bind="tweet.created | date:'mediumDate'"></span>
+        by
+        <span ng-if="tweet.user" ng-bind="tweet.user.displayName"></span>
+        <span ng-if="!tweet.user">Deleted User</span>
+      </small>
+      <h4 class="list-group-item-heading" ng-bind="tweet.name"></h4>
+    </a>
+  </div>
+  <div class="alert alert-warning text-center" ng-if="vm.tweets.$resolved && !vm.tweets.length">
+    No Tweets yet, why don't you <a ui-sref="tweets.create">create one</a>?
+  </div>
+</section>
