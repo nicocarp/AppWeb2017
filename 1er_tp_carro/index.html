@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+<head lang="es">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+	<link rel="stylesheet" href="estaticos/css/qunit.css">
+    <link href="estaticos/css/materialize_icons.css" rel="stylesheet">
+    <link href="estaticos/css/utils.css" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" href="estaticos/css/materialize.min.css"  media="screen,projection"/>
+	<link href="estaticos/css/nouislider.min.css" rel="stylesheet">	
+	<title>Productos</title>
+</head>
+<body>
+
+<!-- ININCIO NAV  -->
+<nav class=" white" role="navigation">
+	<div class="nav-wrapper container ">
+		<a href="#!"  class="brand-logo black-text "><i id="logo_river"></i>
+			Tienda</a>
+		<ul class="right hide-on-med-and-down">
+			<li><a class="black-text" id="mostrar_productos" >Productos</a></li>
+			<li><a class="black-text" id="mostrar_promociones" >Promociones</a></li>
+			<li><a class="black-text" id="restart_app" >Restart</a></li>
+		</ul>
+		 <ul id="nav-mobile" class="side-nav">
+			<li><a class="black-text" id="mostrar_productos" >Productos</a></li>
+			<li><a a class="black-text" id="mostrar_promociones" >Promociones</a></li>
+			<li><a class="black-text" id="restart_app" >Restart</a></li>
+	     </ul>
+		 <a href="#" data-activates="nav-mobile" class="button-collapse red-text"><i class="material-icons">menu</i></a>
+	</div>
+</nav>
+<!-- FIN NAV  -->
+
+
+<!-- CONTENEDOR PRINCIPAL  -->
+<div class="section no-pad-bot" id="index-banner">  
+      
+      <div class="row center">
+        <h5 class="header_titulo" id="header_titulo"></h5>
+      </div>
+     
+    </div>
+
+    
+<!-- Boton flotante carrito-->
+<div class="btn_shopping_car fixed-action-btn">
+	    <a id="mostrar_carro" href="#modal_carro" class="btn-floating btn-large red">
+	      <i style="position:relative; left: -5px;" class="material-icons">shopping_cart</i>
+	    </a>
+	    <span class="numero_shopping_car white-text ">
+	    	<i id="cantidad_productos_carro"></i>
+	    </span>
+</div>     	
+<!-- Fin boton flotante carrito-->
+    
+<!-- CONTENEDORES PRINCIPALES  -->
+<div class="container">
+			
+		<div class="divider"></div>
+		
+		<div id="contenedor_promos"></div>
+		
+		<div id="contenedor_productos_ventas" class="row">
+			<!-- Row para FILTROS-->	
+			<div class="col m12 s0">
+				<div class="input-field col s4">
+					<select id="filtro-select-categorias">
+						<option value=""  selected></option>						
+					</select>
+					<label>Categoria</label>
+				</div>
+		        <div class="input-field col s4">
+		          	<input id="filtro-nombre" value="" type="text" class="validate">
+					<label for="filtro-nombre">Nombre</label>
+		        </div>
+		        <div class="input field col s4 "><br>
+						<input type="checkbox" id="filtro-en-stock">
+						<label for="filtro-en-stock">En Stock</label>
+				</div>
+			</div>
+
+
+			 <!-- Inicio Listado de productos en Ventas-->
+		
+			<ul id="productos_ventas"></ul>
+		
+		</div>
+
+	
+</div>
+  	    
+<!-- Fin contenedor principal  -->
+
+
+<!-- Modal Carrito -->
+<div id="modal_carro" class="modal modal-fixed-footer">
+	<div class="modal-content">
+		<h4 class="header center black-text" >Carro</h4>			
+		<ul class="collection" id="productos_carro"></ul>		
+	</div>
+	<div class="modal-footer">
+		<div class="row">
+			<div class="col s4 right">
+				<button type="button" id="btn_checkout" class="btn red accent-4">
+					<span class="right">La Cuenta</span>
+				</button>
+			</div>			
+		</div>		
+	</div>
+</div>
+<!-- FIN Modal Carrito -->
+<!-- Modal INFO PRODUCTO -->
+<div id="modal_info_producto" class="modal modal-fixed-footer">
+	<div class="modal-content">
+		<h4 class="header center black-text" >Comprar</h4>
+			<div id="info_prod"></div>  				
+	</div>	
+</div>
+<!-- FIN INFO PRODUCTO -->
+
+</body>
+	<script type="text/javascript" src="estaticos/js/jquery.min.js"></script>
+	<script src="estaticos/js/qunit.js"></script>
+	<script type="text/javascript" src="estaticos/js/materialize.min.js"></script>
+	<script src="estaticos/js/utils.js"></script>
+	<script src="tests.js"></script>
+	<script src="Ventas.js"></script>
+	<script type="text/javascript" src="estaticos/js/underscore.js"></script>
+	<script src="estaticos/js/nouislider.min.js"></script>
+	<script src="estaticos/js/lockr.js" type="text/javascript"></script>
+</html>
+
+<script id="promo-tpl" type="text/tempalte">
+
+{{ _.each(promociones, function(promocion){ }}
+<div class="row card-panel white lighten-5 z-depth-1"> 			  					
+	<div class="col s12 m8 left">
+	{{ _.each(promocion.productos, function(producto){ }}	
+		<div class="row valign-wrapper">
+			<div class="col s2">
+				<img src="{{=producto.imagen}}" class=" responsive-img"> 
+			</div>
+			<div class="col s10">
+				<p><span class="black-text">{{=producto.nombre}}</span></p>
+				<span class="black-text">$ {{=producto.precio}}</span>
+			</div>
+		</div>
+	{{ }); }}
+	</div>
+	<div class="row col s12 m4">
+		<p class="col m12 s12">{{=promocion.mjePromocion}}</p>
+		<p class="col m12 s4 left precio-viejo">$ {{=promocion.getPrecioTotalSinDescuento()}}</p>
+		<p class="col m12 s4 right">$ {{=promocion.getPrecioTotalConDescuento()}}</p>
+		{{ if (promocion.hayStock()) {  }}
+			<a class="btn col m12 s12" data-promo-id="{{=promocion.id}}" id="agegar_combo_al_carro">Agregar</a>	
+		{{ }else{ }}
+			<span class="col m12 s12 badge black white-text">Agotado</span>
+		{{ } }}
+	</div>
+</div>
+{{ }) }}
+
+</script>
+
+<script type="text/template" id="nuevo-producto-carro-tpl">
+{{ _.each(carro.productos, function(producto){  }}
+
+<li class="collection-item" id="{{=producto.producto.nombre}}">
+	<div class="row">
+    	<div class="col l3 m3 s12">
+      		<img src="{{=producto.producto.imagen}}" alt="" class=" responsive-img">
+    	</div>
+    	<div class="row col l3 m4 s12">
+ 	 		<p><span class="black-text">{{=producto.producto.nombre}}</span></p>
+     	 	
+
+    	</div> 
+   	 	<div class="col l2 m3 s12">
+			<input id="cant_carrito" data-valid-cant="{{=producto.cantidad}}" data-id-prod="{{=producto.producto.id}}" maxlength="12" value="{{=producto.cantidad}}" type="number"> 	
+    	</div>
+    	<div class="col l4 m2 s12">
+    		<div class="field">
+    			<p<span class="right">$ {{=producto.precioSubTotal}}</span></p>
+    			<span class="precio_unitario right">$ {{=producto.producto.precio}}/cu</span>
+    		</div>
+    		
+    	</div>
+			<a id="sacar_del_carro" class="secondary-content"><i class="black-text material-icons">delete</i></a>
+	</div>
+ </li>
+{{ }) }}
+{{ var sub_total = carro.getTotalSinDescuento(); }}
+{{ var descuentos = carro.getDescuentosPromo(promociones); }}
+{{ var  total = sub_total - descuentos;}}
+<li class="collection-item">
+	<div class="row">
+		<div class="col s8">
+			<span class="title">Subtotal</span>
+		</div>
+		<div class="col s4">
+			<div class="right "><strong>$ <span class="value">{{=sub_total}}</span></strong></div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col s8">
+			<span class="title">Descuentos</span>
+		</div>
+		<div class="col s4">
+			<div class="right"><strong>$ <span class="value">{{=descuentos}}</span></strong></div>		
+		</div>
+	</div>
+	<div class="row">
+		<div class="col s8">
+			<span class="title">Total</span>
+		</div>
+		<div class="col s4">
+			<div class="right"><strong>$ <span class="value">{{=total}}</span></strong></div>		
+		</div>
+	</div>
+</li>
+
+</script>
+
+<script id="nuevo-producto-tpl" type="text/template">	
+{{ _.each(productos, function(producto){  }}
+	<a data-prod-id="{{=producto.id}}" id="click_info_producto" href="#modal_info_producto">
+	<li class="col s12 m6 l3">
+		 <div class="card medium">
+		{{ var hay_promo = _.findWhere(promociones, {"id_prod":producto.id}); }}
+		{{ if ( hay_promo != undefined) { 	}}
+			{{ if ( hay_promo.promocion.getTipo() == "descuento" ) { 	}}
+				<div class="product-offprice-ribbon ">
+					Off <br> 
+					-{{=hay_promo.promocion.getPorcentajeDescuento()}}%
+				</div>				
+		    {{ }else if (hay_promo.promocion.getTipo() == "combo"){  }}
+		    	<span id="alerta_combo" href=""><i class="material-icons medium yellow-text lighten-2-text">error_outline</i></span>
+		    {{ }; }}		       
+		{{  }; }}
+			<div class="card-image" >
+				<img class="responsive-img" src="{{=producto.imagen}}">	
+			</div>
+			<div class=" card-content">
+				<span class="nombre-prod">{{=producto.nombre}}</span>	
+				
+
+				<div class="col s12  center">
+					<span class=" badge bottom ">Stock {{=producto.cantidad}}</span>	
+				</div>
+
+				<br>
+				<div class=" col s12">
+				{{ if (hay_promo != undefined && hay_promo.promocion.getTipo() == "descuento" ){ }}
+				{{var func_descuento = _.partial(hay_promo.promocion.aplicarDescuento, hay_promo.promocion.descuento);}}
+					
+					<span class="precio-promo right ">$ {{=producto.getPrecioUnitario(func_descuento)}}</span>	
+					<br><br>
+					<span class="precio-viejo right">$ {{=producto.precio}}</span>	
+					
+				{{ }else{ }}
+					<span class="precio-sin-promo right">$ {{=producto.precio}}</span>	
+				{{ } }}
+				</div>					
+			</div>
+		</div>
+	</li></a>
+{{ }); }}
+</script>
+
+
+
+<script id="info-producto-tpl" type="text/template">
+{{ var hay_promo = _.findWhere(promociones, {"id_prod":producto.id}); }}
+
+<div class="row section" id="info_prod_{{=producto.id}}" data-prod-id="{{=producto.id}}" >
+	<div class="col m6 s12">
+		<img src="{{=producto.imagen}}" style="width: -moz-available;">
+	</div>
+	<div class="col m6 s12">
+		<h5>{{=producto.nombre}}</h5>
+		{{var precio_unitario = producto.precio;}}
+		{{ if(hay_promo) { }}
+			<span style="height:auto !important;" class=" badge yellow black-text">{{=hay_promo.promocion.mjePromocion}}</span>
+			<br><br><br>
+			{{ if (hay_promo.promocion.getTipo() == 'descuento')}}
+			{{var func_descuento = _.partial(hay_promo.promocion.aplicarDescuento, hay_promo.promocion.descuento);}}
+				{{precio_unitario = producto.getPrecioUnitario(func_descuento);}}
+		{{ } }}
+	<div class="row no-margin">
+	<div class="col s12">							
+			<div class="input-field quantity col s4">
+				<input type="number" name="quantity" id="input_cant_pedida_{{=producto.id}}" min="1" max="99999" value="1">
+				<label for="quantity" class="active">Quantity</label>
+		</div><br>
+		<div class="col s4"><span class="price">$ <span itemprop="price" class="price-value" data-baseprice="55.00">{{=precio_unitario}}</span></span></div>						
+	</div>
+	<button id="btn_add_carro"  data-prod-id="{{=producto.id}}" class="btn btn-large main-pink waves-effect waves-light"><i class="material-icons right">add_shopping_cart</i>Buy</button>
+</div>
+	</div>				
+</div>
+</script>
+
+<script type="text/template" id="checkout-tpl"></script>
+
+
+
+<script type="text/javascript">
+	_.templateSettings = {
+		evaluate:/\{\{(.+?)\}\}/g,
+	  interpolate: /\{\{=(.+?)\}\}/g,
+	  escape: /\{\{-(.+?)\}\}/g
+	};
+
+	$(document).ready(function(){
+		$(document).ready(function(){
+			$('select').material_select();			
+			$('.tooltipped').tooltip({delay: 50});
+		});
+    	$('.modal').modal();
+
+		$('.button-collapse').sideNav();
+		$('.tooltipped').tooltip({delay: 50});
+
+  	 	var productosCarroTpl = _.template($("#nuevo-producto-carro-tpl").html());
+		var ventas = new Ventas();
+		armar_html_productos_en_ventas(ventas.productos, ventas.getIdsProdsEnPromo());
+		armar_html_categorias(ventas.categorias);
+		actualizar_numeros_carro();		
+		mostrar_productos_ventas();
+
+
+		
+
+		function armar_html_categorias(categorias){
+			_.each(categorias, function(categoria){
+				$('#filtro-select-categorias').append($('<option>', {
+				    value: Number(categoria.id),
+				    text: String(categoria.nombre)
+				}));	
+			})
+		}
+
+		function armar_html_productos_en_ventas(productos, promociones){
+			var productoTpl = _.template($("#nuevo-producto-tpl").html());
+			$("#productos_ventas").html(productoTpl(
+				{"productos":productos,
+				"promociones": promociones
+			}));
+		}
+
+		function actualizar_numeros_carro(){			
+			$("#cantidad_productos_carro").html(ventas.carro.getCantProductos());
+		}
+
+		function armar_html_carro(carro, promociones) {
+			var promociones = promociones;
+			var html_productos = productosCarroTpl({
+				"carro":carro,
+				"promociones":promociones
+			}); 
+			$("#productos_carro").html(html_productos);			
+			actualizar_numeros_carro();			
+		}		
+
+		function armar_html_promo(promociones){
+			var tpl_promo = _.template($("#promo-tpl").html());
+			var html_promo = tpl_promo({"promociones":promociones});
+			$("#contenedor_promos").html(html_promo);
+		}
+
+		function filtrado_productos(){
+			var buscar_por_categoria  = $( "#filtro-select-categorias" ).val();
+			var buscar_por_stock =  $("#filtro-en-stock").prop('checked')
+			var buscar_por_nombre = $("#filtro-nombre").val();
+			var filtros = {
+				"categoria": buscar_por_categoria,
+				"stock": buscar_por_stock,
+				"nombre":buscar_por_nombre
+			};
+			var productos = ventas.getProductosPorFiltro(filtros);
+			armar_html_productos_en_ventas(productos, ventas.getIdsProdsEnPromo());
+		}
+
+		
+		/* Nav */
+		$(document).on('click', '#mostrar_promociones', function(){
+			$("#contenedor_productos_ventas").hide();
+			$("#contenedor_promos").show();
+			armar_html_promo(ventas.promociones);
+			  $('.button-collapse').sideNav('hide');
+			$('#header_titulo').html("Promociones del dia");
+		});
+	
+		function mostrar_productos_ventas(){
+			$("#contenedor_promos").hide();		
+			$("#contenedor_productos_ventas").show();
+			  $('.button-collapse').sideNav('hide');
+			$('#header_titulo').html("Todos los productos");
+			armar_html_productos_en_ventas(ventas.productos, ventas.getIdsProdsEnPromo());
+		}
+		$(document).on('click', '#mostrar_productos', mostrar_productos_ventas);
+		$(document).on('click', '#restart_app', function(){
+			ventas.restart_app();
+			location.reload();
+		});
+
+
+		
+		/* Eventos de filtro */
+		$(document).on('change', '#filtro-select-categorias', filtrado_productos);
+		$(document).on('click', '#filtro-en-stock', filtrado_productos);
+		$(document).on('change', '#filtro-nombre', filtrado_productos);
+		
+		/* Promociones */
+		$(document).on('click', '#agegar_combo_al_carro', function(){
+			var promo_id = Number($(this).data('promoId'));
+			if ((result = ventas.agregarComboAlCarro(promo_id)) == 'ok')
+				actualizar_numeros_carro();
+			else
+				Materialize.toast(result, 4000);
+		});
+		/* Info producto */
+		$(document).on('click', '#click_info_producto', function(){
+			var id_p = $(this).data('prodId');
+			var prod = ventas.getProductoById(id_p);
+			var tpl =  _.template($("#info-producto-tpl").html());
+			var promociones = ventas.getIdsProdsEnPromo();
+			$('#info_prod').html(tpl({"producto":prod, "promociones":promociones}));
+		});
+
+		/* Carrito */
+		$(document).on('click', '#btn_add_carro', function(e) {
+			var prod_id =  $(this).data("prodId");
+			var cantidad = Number($("#input_cant_pedida_"+prod_id).val());
+			var result = ventas.agregarAlCarro(prod_id,cantidad);
+			if ( result == 'ok'){
+				actualizar_numeros_carro();
+				 $('#modal_carro').modal('close');			
+			}				
+			else
+				Materialize.toast(result, 4000);
+		});
+
+		
+		$(document).on('change', '#cant_carrito', function(e) {
+			var id_prod = $(this).data("id-prod");
+			var nueva_cantidad = Number($(this).val());
+			var result = ventas.actualizarCantEnCarro(id_prod, nueva_cantidad);
+			if (result == 'ok'){
+				$(this).data("validCant", nueva_cantidad);
+				armar_html_carro(ventas.carro, ventas.getPromociones());	
+			}else{
+				$(this).val($(this).data("validCant"));
+				Materialize.toast(result, 4000);	
+			}			
+		});
+
+		$(document).on('click', '#mostrar_carro', function(){
+			armar_html_carro(ventas.carro, ventas.getPromociones());
+		});
+
+		$(document).on('click', '#sacar_del_carro', function(e) {
+			ventas.carro.sacarDelCarro($(this).parents('li').index());
+			armar_html_carro(ventas.carro, ventas.getPromociones());
+		});
+		/* checkout */
+		$(document).on('click', '#btn_checkout', function(e){
+			var result = ventas.checkout();
+			armar_html_carro(ventas.carro, ventas.getPromociones());
+			//var check-tpl = _.template($("#checkout-tpl").html());
+			Materialize.toast(result, 4000);
+			setTimeout ("location.reload();", 2000);			
+		});
+		
+		
+
+		
+
+});
+	
+
+</script>
