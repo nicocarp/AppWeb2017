@@ -11,21 +11,16 @@
 
         <div class="form-group" show-errors>
           <label class="control-label" for="loc">Localidad</label>
-          <input name="loc" type="text" ng-model="vm.tweet.name" id="loc" class="form-control" placeholder="Localidad" required>
+          <input name="loc" type="text" ng-model="vm.tweet.nombre_loc" id="loc" class="form-control" placeholder="Localidad" required>
           <div ng-messages="vm.form.tweetForm.loc.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Localidad es requerida.</p>
           </div>
         </div>
 
-        <div class="form-group" show-errors>
-          <label class="control-label" for="loc">Token Twitter</label>
-          <input name="token_twiter" type="text" ng-model="vm.tweet.token_twiter" id="token_twiter" class="form-control" placeholder="Token" required>
-          <div ng-messages="vm.form.tweetForm.token_twiter.$error" role="alert">
-            <p class="help-block error-text" ng-message="required">Token es requerido.</p>
-          </div>
+        <div class="form-group" >
+          <label> LatLong</label>
+          <input class="form-control" id="latlong" ng-model="vm.tweet.latlong" for="loc">
         </div>
-
-
         <div class="form-group">
           <button type="submit" class="btn btn-default">Iniciar Analisis</button>
         </div>
