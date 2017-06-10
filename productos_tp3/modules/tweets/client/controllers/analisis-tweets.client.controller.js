@@ -40,7 +40,6 @@
           position: {lat: -43.24895, lng: -65.30505},
           map: map
         });
-
         function geocodeLatLng(geocoder, map, infowindow) {
           var input = $scope.vm.tweet.latlong;          
           var latlngStr = input.split(',', 2);
@@ -65,9 +64,11 @@
       console.log("subit");
       
       /* Tirando fruta */
-      var probando  = $resource('/api/analisis').query();
+      var probando  = $resource('/api/analisis').get(function(){
+        console.log(probando.statuses[0].text);
+      });
       console.log("VER");
-      console.log(probando);   
+      //console.log(probando);   
 
       /* fin fruta*/
     

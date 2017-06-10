@@ -9,9 +9,8 @@ var path = require('path'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller')),
   _ = require('lodash'), 
   express = require('express'),
-  Twitter = require('twitter');
-
-
+  Twitter = require('twitter'),
+   sentiment = require('sentiment');
 /**
  * Create a Tweet
  */
@@ -129,7 +128,7 @@ exports.analisis = function(req, res) {
       
     })
 
-
+  /*
   var params = {screen_name: 'd3f0'};
   client.get('statuses/user_timeline', params, function(error, tweets, response) {
     if (!error) {
@@ -140,7 +139,24 @@ exports.analisis = function(req, res) {
       console.log(error);
       return res.jsonp(error);
     }
+  });*/
+  client.get('search/tweets', {q:'trelew', count:'50'}, function(error, tweets, response) {
+     var textos = tweets.statuses.map(function(tweet) {return tweet.text});
+     var lista_score = textos
+                              .map(function(texto){ return sentiment(texto)})
+                              .map(function(result,i){return [textos[i], result.score]});
+                              
+     console.log(textos);
+     // LINEA DE API DE ANALISIS
+     // pagina https://store.apicultur.com/apis/info?name=stmtlk&version=1.0.0&provider=stmtlk
+     // https://store.apicultur.com/api/stmtlk/1.0.0/valoracion/tweet/10/dia%20feo
+     // ejemplo analizador http://www.mrtuit.com/
+
+     console.log(lista_score);
+     return res.jsonp(tweets);
   });
+
+
   //console.log('listo');
   //var tweets = [{"hola":"chau"},{"hola":"chau"},{"hola":"chau"}];
   //return res.jsonp(tweets);
